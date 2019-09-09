@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FCMChatApplication</string>
+    <string name="good_internet">Good! Connected to Internet</string>
+    <string name="bad_internet">Sorry! Not connected to internet</string>
+
+    <!-- Login-->
+    <string name="login_label">Login</string>
+    <string name="fcm_title">Welcome to FCM Chat Application</string>
+    <string name="email">Please Enter Email</string>
+    <string name="pass">Please Enter Password</string>
+    <string name="btn_login">Login</string>
+    <string name="txt_forgot">Forgot Password</string>
+    <string name="txt_register">Do not have account? Sign up</string>
+
+    <!--Register-->
+    <string name="register_title">Register</string>
+    <string name="already_register">already registered. login me!</string>
+    <string name="btn_register">Register</string>
+    <string name="pass_short">Password too short, enter minimum 6 characters!</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="reg_sucess">Registration Successfull!</string>
+    <string name="login_Fail">Login Failed Please Check Email and Password</string>
+    <string name="login_success">Login Successfully</string>
+
+    <!--Forgot Password-->
+    <string name="forgot_title">Forgot Password</string>
+    <string name="forgot_txt">We need Registered Email Id to Retrieve  Password</string>
+    <string name="btn_reset">Reset Password</string>
+    <string name="txt_cancel">Cancel</string>
+    <string name="reset_failed">Failed to send reset email</string>
+    <string name="reset_success">We have sent Password to your Register Email</string>
+
+    <!--Setting Activity-->
+    <string name="change_email">Change Email Address</string>
+    <string name="btn_update_email">Update Email</string>
+    <string name="btn_update_pass">Update Password</string>
+    <string name="delete_Account">Delete Account</string>
+    <string name="update_email_success">Email address is updated Successfully</string>
+    <string name="fail_updateEmail">Failed to update email Address</string>
+    <string name="change_pass">Change Password</string>
+    <string name="fail_update_pass">Failed to update password</string>
+    <string name="success_update_pass">Password is updated Successfully</string>
+    <string name="success_delete">Your Account is Deleted Successfully is deleted</string>
+    <string name="fail_delete">Failed to delete Account Account</string>
+    <string name="btn_delete_account">Delete Account</string>
+    <string name="sure_acc_delete">Are You Sure Want to delete this Account</string>
+
+    <string name="success_logout">Successfully LogOut</string>
+    <string name="users_profile">Users Profile</string>
+
+    <string name="login_with">OR Login With</string>
+
+    <string name="setting__label">Setting</string>
+    <string-array name="setting_array">
+        <item>Change Email</item>
+        <item>Change Password</item>
+        <item>Delete Account</item>
+    </string-array>
+
+    <!--Login With Facebook-->
+    <string name="facebook_app_id">515427009260895</string>
+    <string name="fb_login_protocol_scheme">fbFACEBOOK-APP-ID</string>
+
+    <!--Decode Address-->
+    <string name="unlocation">Unknown Location</string>
+    <string name="loc_address">address</string>
+    <string name="chat_history">Chat History</string>
+
+
+    <!--Shared Preference Constant-->
+    <string name="pref_user_location">userLocation</string>
+    <string name="const_chat_user">chatUser</string>
+    <string name="pref_user_Id">fcmUserID</string>
+    <string name="const_is_user_register">false</string>
+
+
+</resources>

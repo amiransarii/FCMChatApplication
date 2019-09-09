@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/change_email"
+        android:textSize="@dimen/app_title"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"/>
+
+    <EditText
+        android:paddingTop="@dimen/text_padding"
+        android:id="@+id/updateEmail_edit"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/txt_size"
+        android:inputType="textEmailAddress"
+        android:layout_height="wrap_content"
+        android:hint="@string/email" />
+
+    <Button
+        android:id="@+id/updateEmail_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_update_email"
+        android:textAllCaps="false"
+        android:textSize="@dimen/txt_title"
+        android:textColor="@color/FCM_BLUE"/>
+
+    <ProgressBar
+        android:id="@+id/updateEmail_progressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/updateEmail_cancel"
+        android:paddingTop="@dimen/text_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/txt_cancel"
+        android:textSize="@dimen/app_title"
+        android:textColor="@color/colorPrimary">
+    </TextView>
+
+</LinearLayout>
