@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -11,6 +13,9 @@ import android.widget.Toast;
 
 import com.example.fcmchatapplication.adapter.ChartAdapter;
 import com.example.fcmchatapplication.model.ChatMessage;
+import com.example.fcmchatapplication.model.NotificationData;
+import com.example.fcmchatapplication.receiver.FCMBroadcastReceiver;
+import com.example.fcmchatapplication.util.NotificationUtils;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +39,14 @@ public class UsersChatActivity extends BaseActivity {
     private FirebaseUser user;
     private String currentUserEmail=null;
     private String chatUserEmail=null;
+
+    private double currentUserlatitude=0.0;
+    private double currentUserLongitude=0.0;
+    private double chatUserLatitude=0.0;
+    private double chatUserLongitude=0.0;
+    private static final int MENULOCATION = 1;
+    private ValueEventListener mUsersChatReferenceListener;
+
 
     @Override
     protected int getContentView() {
@@ -60,6 +73,11 @@ public class UsersChatActivity extends BaseActivity {
 
         if(chat_intent!=null){
             chatUserEmail=chat_intent.getStringExtra(getResources().getString(R.string.const_chat_user));
+            currentUserlatitude=intent.getDoubleExtra(getResources().getString(R.string.current_user_latitude),0.0);
+            currentUserLongitude=intent.getDoubleExtra(getResources().getString(R.string.current_user_longitude),0.0);
+            chatUserLatitude=intent.getDoubleExtra(getResources().getString(R.string.chat_user_latitude),0.0);
+            chatUserLongitude=intent.getDoubleExtra(getResources().getString(R.string.chat_user_longitude),0.0);
+
         }
 
         if (user != null) {
@@ -75,12 +93,23 @@ public class UsersChatActivity extends BaseActivity {
                 }
                 else{
                     if (input.getText().toString().trim().equals("")) {
-                        Toast.makeText(UsersChatActivity.this, "Please enter some texts!", Toast.LENGTH_SHORT).show();
+                        showErrorMessage( "Please enter some texts!",Color.BLACK);
                     } else {
                         String id = databaseChats.push().getKey();
                         ChatMessage chatMessage = new ChatMessage(input.getText().toString(), user.getDisplayName(),user.getUid(),currentUserEmail,chatUserEmail);
                         databaseChats.child(id).setValue(chatMessage);
+
+                        if(!isAppStatus()){
+                            Intent intent_Chat = new Intent();
+                            intent_Chat.setClass(UsersChatActivity.this, FCMBroadcastReceiver.class);
+                            intent_Chat.putExtra("chatTitle","New Message");
+                            intent_Chat.putExtra("chatMessage",input.getText().toString().trim());
+                            intent_Chat.setAction("com.example.fcmchatapplication.Chat");
+                            sendBroadcast(intent_Chat);
+                        }
                         input.setText("");
+
+
                     }
                 }
 
@@ -96,7 +125,7 @@ public class UsersChatActivity extends BaseActivity {
         FirebaseRecyclerOptions<ChatMessage> options =
                 new FirebaseRecyclerOptions.Builder<ChatMessage>().setQuery(query, ChatMessage.class).build();
 
-        databaseChats.addValueEventListener(new ValueEventListener() {
+        mUsersChatReferenceListener= databaseChats.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 chatMessageList.clear();
@@ -129,5 +158,44 @@ public class UsersChatActivity extends BaseActivity {
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
 
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menu_location = menu.findItem(MENULOCATION);
+        if(menu_location == null){
+            menu_location = menu.add(Menu.NONE, MENULOCATION, 3, "Location").setIcon(R.drawable.ic_action_location_2);
+            menu_location.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            menu_location.setIcon(R.drawable.ic_action_location_2);
+        }
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case MENULOCATION:
+                Intent intent_Map= new Intent(UsersChatActivity.this,LocationMapActivity.class);
+                intent_Map.putExtra(getResources().getString(R.string.current_user_latitude),currentUserlatitude);
+                intent_Map.putExtra(getResources().getString(R.string.current_user_longitude),currentUserLongitude);
+                intent_Map.putExtra(getResources().getString(R.string.chat_user_latitude),chatUserLatitude);
+                intent_Map.putExtra(getResources().getString(R.string.chat_user_longitude),chatUserLongitude);
+                intent_Map.putExtra(getResources().getString(R.string.const_chat_user),chatUserEmail);
+                 startActivity(intent_Map);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        databaseChats.removeEventListener(mUsersChatReferenceListener);
     }
 }

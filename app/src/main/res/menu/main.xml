@@ -2,6 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+   <!-- <item
+        android:id="@+id/menu_location"
+        app:showAsAction="always"
+        android:title="Location"
+        android:icon="@drawable/ic_action_location_2"></item>-->
+
     <item
         android:id="@+id/menu_sign_out"
         app:showAsAction="always"

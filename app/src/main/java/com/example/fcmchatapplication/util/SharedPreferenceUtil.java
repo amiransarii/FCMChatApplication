@@ -3,6 +3,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class SharedPreferenceUtil {
     private Context context;
@@ -38,13 +41,23 @@ public class SharedPreferenceUtil {
     {
         long l= sharedPreferences.getLong(s,-1L);
         if(l==-1L)
-        {
-            return null;
-        }
-        else {
-            return Long.valueOf(l);
-        }
+    {
+        return null;
     }
+    else {
+        return Long.valueOf(l);
+    }
+    }
+
+    public Set<String> loadStringSet(String s){
+      Set<String> setSubSet=sharedPreferences.getStringSet(s,null);
+              if(setSubSet==null){
+                  return new HashSet<String>();
+              }
+              return setSubSet;
+        }
+
+
 
     public String loadPrefString(String s)
     {
@@ -94,6 +107,13 @@ public class SharedPreferenceUtil {
         editor.putString(s,s1);
         editor.commit();
     }
+
+    public void saveStringSet(String s, Set<String> set){
+        editor.putStringSet(s,set);
+        editor.commit();
+    }
+
+
 }
 
 

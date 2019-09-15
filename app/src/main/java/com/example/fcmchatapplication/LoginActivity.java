@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 
 import com.example.fcmchatapplication.model.CurrentAddressDecode;
 import com.example.fcmchatapplication.model.LocationTrack;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -54,6 +55,7 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseUser currentUser=null;
     private boolean isUserRegister=false;
+    private boolean isUserLogout=false;
 
 
 
@@ -90,10 +92,12 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
         imageView_Twitter.setOnClickListener(this);
         currentUser=mFirebaseAuth.getCurrentUser();
 
+
         Intent intent_Register= getIntent();
 
         if(intent_Register!=null){
             isUserRegister=intent_Register.getBooleanExtra(getResources().getString(R.string.const_is_user_register),false);
+            isUserLogout= intent_Register.getBooleanExtra(getResources().getString(R.string.is_logout),false);
         }
             if(currentUser!=null && !isUserRegister){
                 Intent intent_Profile=new Intent(LoginActivity.this,UsersProfileActivity.class);
@@ -101,8 +105,6 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
                 startActivity(intent_Profile);
                 finish();
             }
-
-
 
 
         //sign in with google account
@@ -247,6 +249,7 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
         getMenuInflater().inflate(R.menu.main, menu);
         menu.removeItem(R.id.menu_sign_out);
         menu.removeItem(R.id.menu_setting);
+      //  menu.removeItem(R.id.menu_location);
         return true;
     }
 

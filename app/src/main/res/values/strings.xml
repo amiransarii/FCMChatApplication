@@ -45,6 +45,11 @@
     <string name="fail_delete">Failed to delete Account Account</string>
     <string name="btn_delete_account">Delete Account</string>
     <string name="sure_acc_delete">Are You Sure Want to delete this Account</string>
+    <string name="notification_entertainment">Entertainment</string>
+    <string name="notification_eduction">Education</string>
+    <string name="notification_career">Career</string>
+    <string name="subscribelist">Subscribe Channel</string>
+
 
     <string name="success_logout">Successfully LogOut</string>
     <string name="users_profile">Users Profile</string>
@@ -71,8 +76,16 @@
     <!--Shared Preference Constant-->
     <string name="pref_user_location">userLocation</string>
     <string name="const_chat_user">chatUser</string>
-    <string name="pref_user_Id">fcmUserID</string>
     <string name="const_is_user_register">false</string>
+    <string name="pref_firebase_token">pref_firebase_token</string>
+    <string name="pref_user_email">pref_user_email</string>
+    <string name="pref_subscribe_list">pref_subscribe_list</string>
+    <string name="current_user_latitude">current_user_latitude</string>
+    <string name="current_user_longitude">current_user_longitude</string>
+    <string name="chat_user_latitude">chat_user_latitude</string>
+    <string name="chat_user_longitude">chat_user_longitude</string>
+    <string name="title_activity_location_map">Map</string>
+    <string name="is_logout">false</string>
 
 
 </resources>

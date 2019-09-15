@@ -5,10 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingActivity"
+    android:orientation="vertical"
     android:layout_margin="@dimen/layout_margin">
 
-    <ListView
-        android:id="@+id/lv_setting"
+    <LinearLayout
+        android:id="@+id/content_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/subscribelist"
+            android:textSize="@dimen/app_title"
+            android:textStyle="bold|italic"/>
+
+        <CheckBox
+            android:id="@+id/chkEntertainment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+            android:text="@string/notification_entertainment" />
+        <CheckBox
+            android:id="@+id/chkEduction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+            android:text="@string/notification_eduction" />
+        <CheckBox
+            android:id="@+id/chkCareer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+            android:text="@string/notification_career" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lv_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left">
+
+        <ListView
+            android:id="@+id/lv_setting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+
 </LinearLayout>
